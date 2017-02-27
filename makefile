@@ -6,15 +6,15 @@
 #    By: prossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 11:34:52 by prossi            #+#    #+#              #
-#    Updated: 2017/02/25 15:33:09 by prossi           ###   ########.fr        #
+#    Updated: 2017/02/27 14:22:39 by prossi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = my_libft.a
 
-HEAD = ./include
+SRC_PATH = ./src/off_libft
 
-SRC_PATH = ./src
+PIMP_SRC_PATH = ./src/pimp_libft
 
 SRC = ft_strlen ft_strdup ft_strcpy ft_strncpy \
 	  ft_strcat ft_strncat ft_putchar ft_putchar_fd \
@@ -33,26 +33,36 @@ SRC = ft_strlen ft_strdup ft_strcpy ft_strncpy \
 	  ft_islower ft_isblank ft_lstnew ft_lstdelone \
 	  ft_lstdel ft_lstadd ft_lstiter ft_lstmap
 
+PIMP_SRC = ft_openfile ft_readfile ft_closefile
+
 SRC := $(addsuffix .c, $(SRC))
+
+PIMP_SRC := $(addsuffix .c, $(PIMP_SRC))
 
 OBJ = $(SRC:.c=.o)
 
+PIMP_OBJ = $(PIMP_SRC:.c=.o)
+
 SRC := $(addprefix $(SRC_PATH)/,$(SRC))
+
+PIMP_SRC := $(addprefix $(PIMP_SRC_PATH)/,$(PIMP_SRC))
 
 FLAG = -Wall -Wextra -Werror
 
-OP = -c -I $(HEAD)
+OP = -c 
 
 all: $(NAME)
 
 $(NAME):
 	gcc $(FLAG) $(OP) $(SRC)
-	(mv *.o src/)
+	mv *.o src/off_libft
+	gcc $(FLAG) $(OP) $(PIMP_SRC)
+	mv *.o src/pimp_libft
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 clean:
-	/bin/rm -f $(OBJ)
+	/bin/rm -f $(OBJ) $(PIMP_OBJ)
 
 fclean: clean
 	/bin/rm -f $(NAME)
