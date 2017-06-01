@@ -6,7 +6,7 @@
 /*   By: prossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 11:23:17 by prossi            #+#    #+#             */
-/*   Updated: 2017/02/27 11:24:27 by prossi           ###   ########.fr       */
+/*   Updated: 2017/06/01 16:37:36 by prossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ int		ft_openfile(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		ft_putstr("error\n");
+		ft_putstr("error in open process\n");
 	return (fd);
 }
